@@ -9,8 +9,7 @@
 
 int random_number_generator(int *seed);
 
-int global_seed; // outside of main and random_number_generator functions
-
+extern int global_seed; // outside of main and random_number_generator functions
 
 int main(int argc, const char * argv[]) {
     // insert code here...
@@ -30,6 +29,8 @@ int main(int argc, const char * argv[]) {
     
     return 0;
 }
+
+int global_seed;
 
 int random_number_generator(int *seed) // seed resides in a memory location
 {
