@@ -9,6 +9,7 @@
 
 int random_number_generator(void);
 
+static int seed = 0;
 
 int main(int argc, const char * argv[]) {
     // insert code here...
@@ -30,7 +31,7 @@ int main(int argc, const char * argv[]) {
 int random_number_generator(void) // seed resides in a memory location
 {
     int number;
-    static int seed = 0;
+    
     seed++;
     
     printf("seed = %d\n", seed);
