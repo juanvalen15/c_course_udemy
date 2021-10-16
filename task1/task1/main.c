@@ -16,14 +16,23 @@ int main(int argc, const char * argv[]) {
     // insert code here...
     int random_number;
     int i;
+    unsigned long len;
     char filename[20]; //  string lenght
     
-    strcpy(filename, "file_");
     
     for (i=0; i<10; i++)
     {
         random_number = random_number_generator(i);
         printf("seed = %d rand = %d\n", i,  random_number);
+        
+        strcpy(filename, "file_");
+        len = strlen(filename);
+        
+        filename[len] = '0' + i; // refers to the null character of the filename
+        filename[len+1] = '\0'; // sets the new null character of the filename
+        
+        strcat(filename, ".txt");
+        printf("filename = %s length = %lu\n", filename, strlen(filename));
     }
     
     getc(stdin);
