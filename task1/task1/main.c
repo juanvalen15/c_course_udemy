@@ -5,6 +5,12 @@
 //  Created by juan on 11/10/2021.
 //
 
+/*
+ Code specifications
+ - generate 10 random numbers
+ - store them in 10 different files. the files should be named as file_i.txt where 0<=i<=9
+ */
+
 #include <stdio.h> // input and output functions e.g., printf, puts, putc (out) scanf, gets, getc (in)
 #include <string.h> // string manipulation functions e.g., strcpy (string copy), strcmp (string compare)
 #include <stdlib.h> // memory allocation functions, number conversion functions e.g., malloc (memory allocation), exit, atoi (string to number)
