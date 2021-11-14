@@ -17,7 +17,8 @@ int main(int argc, const char * argv[]) {
     int random_number;
     int i;
     unsigned long len;
-    char filename[20]; //  string lenght
+    char filename[100]; //  string lenght
+    FILE *fp;
     
     
     for (i=0; i<10; i++)
@@ -25,7 +26,7 @@ int main(int argc, const char * argv[]) {
         random_number = random_number_generator(i);
         printf("seed = %d rand = %d\n", i,  random_number);
         
-        strcpy(filename, "file_");
+        strcpy(filename, "/Users/juan/Documents/GitHub/c_course_udemy/task1/task1/file_");
         len = strlen(filename);
         
         filename[len] = '0' + i; // refers to the null character of the filename
@@ -33,7 +34,19 @@ int main(int argc, const char * argv[]) {
         
         strcat(filename, ".txt");
         printf("filename = %s length = %lu\n", filename, strlen(filename));
+        
+        fp = fopen(filename, "w");
+        
+        
+        if (fp == NULL)
+        {
+            printf("Error opening file: %s\n", filename);
+            return 1;
+        }
+        fprintf(fp, "%d\n", random_number); // writing random_number to file
+        fclose(fp); // after writing the file needs to be closed
     }
+    
     
     getc(stdin);
     
