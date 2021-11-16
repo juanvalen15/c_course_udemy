@@ -1,9 +1,10 @@
 //
 //  main.c
-//  task5
+//  task_section7
 //
 //  Created by juan on 16/11/2021.
 //
+    
 
 /*
  Code specifications
@@ -17,7 +18,7 @@
 #include <ctype.h> //  for isspace and isalpha
 
 extern int random_number_generator(int seed);
-extern int create_list_of_numbers(void);
+extern int create_list_of_numbers(char *file_prefix);
 extern int add_number_to_list(int number);
 extern void add_strings_to_list(void);
 extern char *get_poetry_line(int num);
@@ -41,7 +42,7 @@ struct num_and_string *ns_list; // variable of type num_and_string
 
 char *number_map[10] = {"One","Two","Three","Four","Five","Six","Seven","Eight","Nine","Ten"};
 
-int main(int argc, const char * argv[]) {
+int main(int argc, char *argv[]) {
     // insert code here...
     int random_number;
     int i;
@@ -57,7 +58,7 @@ int main(int argc, const char * argv[]) {
     {
         random_number = random_number_generator(i);
         
-        strcpy(filename, "/Users/juan/Documents/GitHub/c_course_udemy/task4/task4/file_");
+        strcpy(filename, argv[1]);
         len = strlen(filename);
         filename[len] = '0' + i; // refers to the null character of the filename
         filename[len+1] = '\0'; // sets the new null character of the filename
@@ -73,7 +74,7 @@ int main(int argc, const char * argv[]) {
         fclose(fp); // after writing the file needs to be closed
     }
     
-    create_list_of_numbers();
+    create_list_of_numbers(argv[1]);
     add_strings_to_list();
     sort_linked_list_ascending_number();  // ascending ordering based on a number
     sort_linked_list_descending_string(); // descending ordering based on a string
@@ -101,7 +102,7 @@ int random_number_generator(int seed) // seed resides in a memory location
     return (unsigned int)(number/65536) % 32768;
 }
 
-int create_list_of_numbers(void)
+int create_list_of_numbers(char *file_prefix)
 {
     FILE *fp;
     int i, random_number;
@@ -111,7 +112,7 @@ int create_list_of_numbers(void)
     
     for(i=0; i<10; i++)
     {
-        strcpy(filename, "/Users/juan/Documents/GitHub/c_course_udemy/task4/task4/file_");
+        strcpy(filename, file_prefix);
         len = strlen(filename);
         filename[len] = '0' + i; // refers to the null character of the filename
         filename[len+1] = '\0'; // sets the new null character of the filename
@@ -212,7 +213,7 @@ char *get_poetry_line(int num) // function will use inter i to be able to compar
         return NULL;
     }
     
-    fp = fopen("/Users/juan/Documents/GitHub/c_course_udemy/task4/task4/ten_green_bottles.txt", "r");
+    fp = fopen("/Users/juan/Documents/GitHub/c_course_udemy/task_section7/task_section7/ten_green_bottles.txt", "r");
     if(fp == NULL)
     {
         printf("Error: cannot open ten_green_bottles.txt\n");
