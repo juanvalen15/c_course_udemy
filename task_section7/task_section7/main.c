@@ -20,8 +20,8 @@
 extern int random_number_generator(int seed);
 extern int create_list_of_numbers(char *file_prefix);
 extern int add_number_to_list(int number);
-extern void add_strings_to_list(void);
-extern char *get_poetry_line(int num);
+extern void add_strings_to_list(char *poetry_file);
+extern char *get_poetry_line(int num, char *poetry_file);
 extern char *get_first_word(char *line);
 extern void sort_linked_list_ascending_number(void);
 extern void sort_linked_list_descending_string(void);
@@ -54,6 +54,14 @@ int main(int argc, char *argv[]) {
     // Initialize list indicating that the list is empty
     ns_list = NULL;
     
+    printf("argc = %d, argv[0] %s\n", argc, argv[0]);
+    
+    if(argc != 3)
+    {
+        printf("Usage: program_name file_prefix poetry_file\n");
+        return 1;
+    }
+    
     for (i=0; i<10; i++)
     {
         random_number = random_number_generator(i);
@@ -75,7 +83,7 @@ int main(int argc, char *argv[]) {
     }
     
     create_list_of_numbers(argv[1]);
-    add_strings_to_list();
+    add_strings_to_list(argv[2]);
     sort_linked_list_ascending_number();  // ascending ordering based on a number
     sort_linked_list_descending_string(); // descending ordering based on a string
     
@@ -182,7 +190,7 @@ int add_number_to_list(int number)
     return 0;
 }
 
-void add_strings_to_list(void)
+void add_strings_to_list(char *poetry_file)
 {
     struct num_and_string *temp_node;
     int i;
@@ -193,7 +201,7 @@ void add_strings_to_list(void)
     
     while(temp_node != NULL) // when temp_node != NULL reaching head of the list temp_node, not the next
     {
-        temp_node->poetry = get_poetry_line(i);
+        temp_node->poetry = get_poetry_line(i, poetry_file);
         i++;
         if(temp_node->poetry != NULL)
             printf("i = %d, line: %s\n", i, temp_node->poetry);
@@ -201,7 +209,7 @@ void add_strings_to_list(void)
     }
 }
 
-char *get_poetry_line(int num) // function will use inter i to be able to compare with an input
+char *get_poetry_line(int num, char *poetry_file) // function will use inter i to be able to compare with an input
 {
     FILE *fp;
     char line[80];
@@ -213,10 +221,10 @@ char *get_poetry_line(int num) // function will use inter i to be able to compar
         return NULL;
     }
     
-    fp = fopen("/Users/juan/Documents/GitHub/c_course_udemy/task_section7/task_section7/ten_green_bottles.txt", "r");
+    fp = fopen(poetry_file, "r");
     if(fp == NULL)
     {
-        printf("Error: cannot open ten_green_bottles.txt\n");
+        printf("Error: cannot open file: %s\n", poetry_file);
         return NULL; // char function
     }
     
