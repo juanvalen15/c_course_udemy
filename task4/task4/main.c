@@ -23,7 +23,6 @@ extern void add_strings_to_list(void);
 extern char *get_poetry_line(int num);
 extern char *get_first_word(char *line);
 extern void sort_linked_list_ascending_number(void);
-extern void insert_node_ascending(struct num_and_string *new_node);
 
 struct num_and_string // definition of struct type
 {
@@ -31,6 +30,10 @@ struct num_and_string // definition of struct type
     char *poetry;
     struct num_and_string *next;
 };
+
+extern void insert_node_ascending(struct num_and_string *new_node);
+
+
 
 struct num_and_string *ns_list; // variable of type num_and_string
 
